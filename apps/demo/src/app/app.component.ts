@@ -5,29 +5,9 @@ import {
   Injector,
   Type,
   ChangeDetectorRef,
-  NgModule,
   AfterViewInit
 } from '@angular/core';
-import { AlertModule } from 'ngx-bootstrap/alert';
-
-@Component({
-  selector: 'simple-component',
-  template: `
-    <alert type='success'>
-      <strong>Well done!</strong> You successfully read this important alert message.
-    </alert>
-  `
-})
-export class SimpleComponent {
-}
-
-@NgModule({
-  declarations: [SimpleComponent],
-  exports: [SimpleComponent],
-  imports: [AlertModule]
-})
-export class SimpleModule {
-}
+import { mod } from 'ngx-bootstrap/chronos/utils';
 
 @Component({
   selector: 'sap-ui5-fun-root',
@@ -54,8 +34,9 @@ export class AppComponent implements AfterViewInit {
   }
 
   private async renderComponent(): Promise<void> {
-    this._ngModule = await this.compiler.compileModuleAsync(SimpleModule);
-    this._ngComponent = SimpleComponent;
+    const module = await import('./simple');
+    this._ngModule = await this.compiler.compileModuleAsync(module.SimpleModule);
+    this._ngComponent = module.SimpleComponent;
     this._ngComponentInjector = this.injector;
 
     this._cd.detectChanges();
