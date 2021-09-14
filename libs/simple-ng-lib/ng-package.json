@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../apps/demo/src/assets/libs/simple-ng-lib",
+  "lib": {
+    "entryFile": "src/index.ts"
+  }
+}

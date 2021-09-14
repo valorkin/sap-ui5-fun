@@ -7,7 +7,6 @@ import {
   ChangeDetectorRef,
   AfterViewInit
 } from '@angular/core';
-import { mod } from 'ngx-bootstrap/chronos/utils';
 
 @Component({
   selector: 'sap-ui5-fun-root',
@@ -34,9 +33,25 @@ export class AppComponent implements AfterViewInit {
   }
 
   private async renderComponent(): Promise<void> {
-    const module = await import('./simple');
-    this._ngModule = await this.compiler.compileModuleAsync(module.SimpleModule);
-    this._ngComponent = module.SimpleComponent;
+    // const module = await import('simple-ng-lib');
+    const module = await import('../assets/libs/simple-ng-lib/fesm2015/simple-ng-lib');
+    const keys = Object.keys(module) as string[];
+    const _module = keys.reduce((prev: Record<string, string>, current: string) => {
+      const exp = (module as any)[current]
+      if (exp.ɵcmp) {
+        prev.cmp = exp;
+      }
+      if (exp.ɵmod) {
+        prev.module = exp;
+      }
+      return prev;
+    }, ({} as {module: any, cmp: any}));
+    if (!_module.module || !_module.cmp) {
+      return;
+    }
+
+    this._ngModule = await this.compiler.compileModuleAsync(_module.module as any);
+    this._ngComponent = _module.cmp as any;
     this._ngComponentInjector = this.injector;
 
     this._cd.detectChanges();

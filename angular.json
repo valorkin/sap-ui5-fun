@@ -117,6 +117,47 @@
           }
         }
       }
+    },
+    "simple-ng-lib": {
+      "projectType": "library",
+      "root": "libs/simple-ng-lib",
+      "sourceRoot": "libs/simple-ng-lib/src",
+      "prefix": "sap-ui5-fun",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["apps/demo/src/app/assets/libs/simple-ng-lib"],
+          "options": {
+            "project": "libs/simple-ng-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/simple-ng-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/simple-ng-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/simple-ng-lib"],
+          "options": {
+            "jestConfig": "libs/simple-ng-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/simple-ng-lib/src/**/*.ts",
+              "libs/simple-ng-lib/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
