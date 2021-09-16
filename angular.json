@@ -45,6 +45,7 @@
                 }
               ],
               "outputHashing": "all",
+              "namedChunks": true,
               "customWebpackConfig": {
                 "path": "apps/demo/webpack.prod.config.js"
               }
