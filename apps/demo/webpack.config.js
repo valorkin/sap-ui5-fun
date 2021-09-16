@@ -29,8 +29,8 @@ module.exports = {
         './Module': 'apps/demo/src/app/remote-entry/entry.module.ts',
       },
       shared: {
-        '@angular/core': { singleton: true, strictVersion: true },
-        '@angular/common': { singleton: true, strictVersion: true },
+        '@angular/core': { singleton: true, strictVersion: false },
+        '@angular/common': { singleton: true, strictVersion: false },
         '@angular/common/http': { singleton: true, strictVersion: true },
         '@angular/router': { singleton: true, strictVersion: true },
         ...sharedMappings.getDescriptors(),

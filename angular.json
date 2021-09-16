@@ -126,6 +126,125 @@
         }
       }
     },
+    "demo-shared-context": {
+      "projectType": "application",
+      "root": "apps/demo-shared-context",
+      "sourceRoot": "apps/demo-shared-context/src",
+      "prefix": "sap-ui5-fun",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/demo-shared-context",
+            "index": "apps/demo-shared-context/src/index.html",
+            "main": "apps/demo-shared-context/src/main.ts",
+            "polyfills": "apps/demo-shared-context/src/polyfills.ts",
+            "tsConfig": "apps/demo-shared-context/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/demo-shared-context/src/favicon.ico",
+              "apps/demo-shared-context/src/assets"
+            ],
+            "styles": ["apps/demo-shared-context/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/demo-shared-context/src/environments/environment.ts",
+                  "with": "apps/demo-shared-context/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "demo-shared-context:build:production"
+            },
+            "development": {
+              "browserTarget": "demo-shared-context:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demo-shared-context:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/demo-shared-context/src/**/*.ts",
+              "apps/demo-shared-context/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/demo-shared-context"],
+          "options": {
+            "jestConfig": "apps/demo-shared-context/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "demo-shared-context-e2e": {
+      "root": "apps/demo-shared-context-e2e",
+      "sourceRoot": "apps/demo-shared-context-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/demo-shared-context-e2e/cypress.json",
+            "devServerTarget": "demo-shared-context:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demo-shared-context:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/demo-shared-context-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "simple-ng-lib": {
       "projectType": "library",
       "root": "libs/simple-ng-lib",
@@ -134,7 +253,6 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": ["apps/demo/src/app/assets/libs/simple-ng-lib"],
           "options": {
             "project": "libs/simple-ng-lib/ng-package.json"
           },

@@ -34,6 +34,13 @@
       "tags": [],
       "implicitDependencies": ["demo"]
     },
+    "demo-shared-context": {
+      "tags": []
+    },
+    "demo-shared-context-e2e": {
+      "tags": [],
+      "implicitDependencies": ["demo-shared-context"]
+    },
     "simple-ng-lib": {
       "tags": []
     }
