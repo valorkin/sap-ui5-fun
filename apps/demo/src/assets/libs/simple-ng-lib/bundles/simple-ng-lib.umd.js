@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('ngx-bootstrap/alert'), require('@angular/elements')) :
-  typeof define === 'function' && define.amd ? define('simple-ng-lib', ['exports', '@angular/core', 'ngx-bootstrap/alert', '@angular/elements'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['simple-ng-lib'] = {}, global.ng.core, global.alert, global.ng.elements));
-}(this, (function (exports, i0, alert, elements) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('ngx-bootstrap/alert'), require('@angular/elements'), require('rxjs')) :
+  typeof define === 'function' && define.amd ? define('simple-ng-lib', ['exports', '@angular/core', 'ngx-bootstrap/alert', '@angular/elements', 'rxjs'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['simple-ng-lib'] = {}, global.ng.core, global.alert, global.ng.elements, global.rxjs));
+}(this, (function (exports, i0, alert, elements, rxjs) { 'use strict';
 
   function _interopNamespace(e) {
     if (e && e.__esModule) return e;
@@ -59,12 +59,26 @@
                   }]
           }] });
 
+  var SimpleService = /** @class */ (function () {
+      function SimpleService() {
+          this.title$ = new rxjs.BehaviorSubject('hello');
+      }
+      return SimpleService;
+  }());
+  SimpleService.ɵfac = i0__namespace.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: SimpleService, deps: [], target: i0__namespace.ɵɵFactoryTarget.Injectable });
+  SimpleService.ɵprov = i0__namespace.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: SimpleService, providedIn: 'platform' });
+  i0__namespace.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "12.2.5", ngImport: i0__namespace, type: SimpleService, decorators: [{
+              type: i0.Injectable,
+              args: [{ providedIn: 'platform' }]
+          }] });
+
   /**
    * Generated bundle index. Do not edit.
    */
 
   exports.SimpleComponent = SimpleComponent;
   exports.SimpleModule = SimpleModule;
+  exports.SimpleService = SimpleService;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

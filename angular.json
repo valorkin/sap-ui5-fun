@@ -462,5 +462,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo-shared-context"
 }

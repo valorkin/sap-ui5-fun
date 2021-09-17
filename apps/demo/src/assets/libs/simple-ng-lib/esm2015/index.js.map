@@ -1,1 +1,1 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/simple-ng-lib/src/index.ts"],"names":[],"mappings":"AAAA,cAAc,4BAA4B,CAAC","sourcesContent":["export * from './lib/simple-ng-lib.module';\n"]}
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../../../libs/simple-ng-lib/src/index.ts"],"names":[],"mappings":"AAAA,cAAc,4BAA4B,CAAC;AAC3C,cAAc,sBAAsB,CAAC","sourcesContent":["export * from './lib/simple-ng-lib.module';\nexport * from './lib/simple.service';\n\n"]}
