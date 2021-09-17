@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "allowJs": true,
     "paths": {
+      "shared-platform": ["libs/shared-platform/src/index.ts"],
       "simple-ng-lib": ["libs/simple-ng-lib/src/index.ts"]
     }
   },

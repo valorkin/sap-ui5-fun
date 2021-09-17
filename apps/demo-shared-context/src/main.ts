@@ -1,21 +1,15 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+(async function main(){
+  const sharedPlatform = await import('shared-platform');
+  const platform = sharedPlatform.getSharedPlatform()
 
-import { environment } from './environments/environment';
 
-import { AppModule } from './app/app.module';
-import { App2Module } from './app2/app2.module';
-import { text_token } from './token';
-import { BehaviorSubject } from 'rxjs';
+  const app = await import('./app');
+  const app2 = await import('./app2');
 
-if (environment.production) {
-  enableProdMode();
-}
+  app.bootstrap(platform);
+  app2.bootstrap(platform);
+})()
 
-const platform = platformBrowserDynamic([{
-  provide: text_token,
-  useValue: new BehaviorSubject('hello')
-}]);
-platform.bootstrapModule(AppModule).catch((err) => console.error(err));
-platform.bootstrapModule(App2Module).catch((err) => console.error(err));
+
+
 

@@ -41,6 +41,16 @@
       "tags": [],
       "implicitDependencies": ["demo-shared-context"]
     },
+    "shared-platform": {
+      "tags": []
+    },
+    "shared-platform-app": {
+      "tags": []
+    },
+    "shared-platform-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["shared-platform-app"]
+    },
     "simple-ng-lib": {
       "tags": []
     }

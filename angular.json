@@ -143,10 +143,8 @@
             "tsConfig": "apps/demo-shared-context/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "apps/demo-shared-context/src/favicon.ico",
-              "apps/demo-shared-context/src/assets"
             ],
-            "styles": ["apps/demo-shared-context/src/styles.scss"],
+            "styles": [],
             "scripts": []
           },
           "configurations": {
@@ -164,11 +162,8 @@
                 }
               ],
               "fileReplacements": [
-                {
-                  "replace": "apps/demo-shared-context/src/environments/environment.ts",
-                  "with": "apps/demo-shared-context/src/environments/environment.prod.ts"
-                }
               ],
+              "namedChunks": true,
               "outputHashing": "all"
             },
             "development": {
@@ -241,6 +236,156 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["apps/demo-shared-context-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "shared-platform": {
+      "projectType": "library",
+      "root": "libs/shared-platform",
+      "sourceRoot": "libs/shared-platform/src",
+      "prefix": "sap-ui5-fun",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/shared-platform"],
+          "options": {
+            "project": "libs/shared-platform/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/shared-platform/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/shared-platform/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared-platform"],
+          "options": {
+            "jestConfig": "libs/shared-platform/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared-platform/src/**/*.ts",
+              "libs/shared-platform/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "shared-platform-app": {
+      "projectType": "application",
+      "root": "apps/shared-platform-app",
+      "sourceRoot": "apps/shared-platform-app/src",
+      "prefix": "sap-ui5-fun",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/shared-platform-app",
+            "index": "apps/shared-platform-app/src/index.html",
+            "main": "apps/shared-platform-app/src/main.ts",
+            "polyfills": "apps/shared-platform-app/src/polyfills.ts",
+            "tsConfig": "apps/shared-platform-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "shared-platform-app:build:production"
+            },
+            "development": {
+              "browserTarget": "shared-platform-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "shared-platform-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/shared-platform-app/src/**/*.ts",
+              "apps/shared-platform-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/shared-platform-app"],
+          "options": {
+            "jestConfig": "apps/shared-platform-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-platform-app-e2e": {
+      "root": "apps/shared-platform-app-e2e",
+      "sourceRoot": "apps/shared-platform-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/shared-platform-app-e2e/cypress.json",
+            "devServerTarget": "shared-platform-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "shared-platform-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/shared-platform-app-e2e/**/*.{js,ts}"]
           }
         }
       }

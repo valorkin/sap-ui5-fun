@@ -1,6 +1,6 @@
-import { Component, Injector, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { text_token } from '../token';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { SimpleService } from 'simple-ng-lib';
 
 @Component({
   selector: 'app-comp',
@@ -13,8 +13,9 @@ export class AppComponent implements OnInit {
   title$?: BehaviorSubject<string>;
   title?: string;
 
-  constructor(private readonly injector: Injector) {
-    this.title$ = injector.get<BehaviorSubject<string>>(text_token);
+  constructor(private readonly simpleSrv: SimpleService) {
+    this.title$ = simpleSrv.title$;
+    (window as any)._s1 = simpleSrv;
   }
 
   updateTitle(value?: string) {
@@ -28,3 +29,5 @@ export class AppComponent implements OnInit {
     });
   }
 }
+
+
