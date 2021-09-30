@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SimpleService } from 'simple-ng-lib';
+import { RtlService } from '../services';
 
 @Component({
   selector: 'app2-comp',
@@ -14,10 +15,11 @@ export class App2Component implements OnInit {
 
   constructor(
     private readonly simpleSrv: SimpleService,
-    private readonly cd: ChangeDetectorRef
+    private readonly cd: ChangeDetectorRef,
+    rtl: RtlService
   ) {
+    console.log('app two', rtl.rtl.getValue());
     this.title$ = simpleSrv.title$;
-    (window as any)._s2 = simpleSrv;
   }
 
   ngOnInit(): void {

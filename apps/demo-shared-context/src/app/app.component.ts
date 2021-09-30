@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SimpleService } from 'simple-ng-lib';
+import { RtlService } from '../services';
 
 @Component({
   selector: 'app-comp',
@@ -13,9 +14,9 @@ export class AppComponent implements OnInit {
   title$?: BehaviorSubject<string>;
   title?: string;
 
-  constructor(private readonly simpleSrv: SimpleService) {
+  constructor(private readonly simpleSrv: SimpleService, rtl: RtlService) {
+    console.log('app one', rtl.rtl.getValue());
     this.title$ = simpleSrv.title$;
-    (window as any)._s1 = simpleSrv;
   }
 
   updateTitle(value?: string) {
